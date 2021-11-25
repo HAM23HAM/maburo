@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:maburo/theme.dart';
@@ -10,7 +12,7 @@ class AboutAppPage extends StatelessWidget {
         margin: EdgeInsets.only(top: 10),
         child: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.close),
+            icon: Icon(Icons.chevron_left),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -18,7 +20,10 @@ class AboutAppPage extends StatelessWidget {
           backgroundColor: backgroundColor1,
           elevation: 0,
           centerTitle: true,
-          title: Text('About App'),
+          title: Text(
+            'About App',
+            style: primaryTextStyle,
+          ),
         ),
       );
     }

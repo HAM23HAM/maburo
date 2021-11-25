@@ -19,7 +19,10 @@ class EditProfilePage extends StatelessWidget {
           backgroundColor: backgroundColor1,
           elevation: 0,
           centerTitle: true,
-          title: Text('Edit Profile'),
+          title: Text(
+            'Edit Profile',
+            style: primaryTextStyle,
+          ),
           actions: [
             IconButton(
               onPressed: () {},

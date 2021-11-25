@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:maburo/pages/about_app_page.dart';
+import 'package:maburo/pages/cart_page.dart';
 import 'package:maburo/pages/developer_detail.dart';
 import 'package:maburo/pages/edit_profile.dart';
 import 'package:maburo/pages/home/main_page.dart';
+import 'package:maburo/pages/product_page.dart';
 import 'package:maburo/pages/sign_in_page.dart';
 import 'package:maburo/pages/sign_up_page.dart';
 import 'package:maburo/pages/splash_page.dart';
@@ -24,6 +26,8 @@ class MyApp extends StatelessWidget {
         '/edit-profile': (context) => EditProfilePage(),
         '/developer-detail': (context) => DeveloperDetailPage(),
         '/about-app': (context) => AboutAppPage(),
+        '/product': (context) => ProductPage(),
+        '/cart': (context) => CartPage(),
       },
     );
   }

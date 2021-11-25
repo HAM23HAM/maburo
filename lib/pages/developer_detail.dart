@@ -11,7 +11,7 @@ class DeveloperDetailPage extends StatelessWidget {
         margin: EdgeInsets.only(top: 10),
         child: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.close),
+            icon: Icon(Icons.chevron_left),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -19,7 +19,10 @@ class DeveloperDetailPage extends StatelessWidget {
           backgroundColor: backgroundColor1,
           elevation: 0,
           centerTitle: true,
-          title: Text('Detail Profile'),
+          title: Text(
+            'Detail Profile',
+            style: primaryTextStyle,
+          ),
         ),
       );
     }
