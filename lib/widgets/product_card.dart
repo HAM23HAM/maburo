@@ -1,14 +1,23 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:maburo/models/product_model.dart';
+import 'package:maburo/pages/product_page.dart';
 import 'package:maburo/theme.dart';
 
 class ProductCard extends StatelessWidget {
+  final ProductModel product;
+  ProductCard(this.product);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/product');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductPage(product),
+          ),
+        );
       },
       child: Container(
         width: 215,
@@ -22,8 +31,8 @@ class ProductCard extends StatelessWidget {
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(height: 30),
-          Image.asset(
-            'assets/image_1.png',
+          Image.network(
+            product.galleries[0].url,
             width: 215,
             height: 150,
             fit: BoxFit.cover,
@@ -36,25 +45,26 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Running',
+                  product.category.name,
                   style: secondaryTextStyle.copyWith(fontSize: 12),
                 ),
                 SizedBox(
                   height: 6,
                 ),
                 Text(
-                  'COURT VISION 2.0',
+                  product.name,
                   style: blackTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: semiBold,
                   ),
                   overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
                 SizedBox(
                   height: 6,
                 ),
                 Text(
-                  '\$58.67',
+                  '\$${product.price}',
                   style: priceTextStyle.copyWith(
                     fontWeight: semiBold,
                   ),

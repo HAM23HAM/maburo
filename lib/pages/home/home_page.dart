@@ -1,13 +1,23 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:maburo/models/user_model.dart';
+import 'package:maburo/providers/auth_provider.dart';
+import 'package:maburo/providers/product_provider.dart';
 import 'package:maburo/theme.dart';
 import 'package:maburo/widgets/product_card.dart';
 import 'package:maburo/widgets/product_tile.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    UserModel user = authProvider.user;
+
+    ProductProvider productProvider = Provider.of<ProductProvider>(context);
+
     Widget header() {
       return Container(
         margin: EdgeInsets.only(
@@ -22,14 +32,14 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hallo, Ilham',
+                    'Hallo, ${user.name}',
                     style: primaryTextStyle.copyWith(
-                      fontSize: 24,
+                      fontSize: 22,
                       fontWeight: semiBold,
                     ),
                   ),
                   Text(
-                    '@tuingham23',
+                    '@${user.username}',
                     style: subtitleTextStyle.copyWith(
                       fontSize: 16,
                     ),
@@ -43,8 +53,8 @@ class HomePage extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage(
-                    'assets/image_profile.png',
+                  image: NetworkImage(
+                    user.profilPhotourl,
                   ),
                 ),
               ),
@@ -192,11 +202,11 @@ class HomePage extends StatelessWidget {
                 width: defaultMargin,
               ),
               Row(
-                children: [
-                  ProductCard(),
-                  ProductCard(),
-                  ProductCard(),
-                ],
+                children: productProvider.products
+                    .map(
+                      (product) => ProductCard(product),
+                    )
+                    .toList(),
               )
             ],
           ),
@@ -227,12 +237,9 @@ class HomePage extends StatelessWidget {
           top: 14,
         ),
         child: Column(
-          children: [
-            ProductTile(),
-            ProductTile(),
-            ProductTile(),
-            ProductTile(),
-          ],
+          children: productProvider.products
+              .map((product) => ProductTile(product))
+              .toList(),
         ),
       );
     }

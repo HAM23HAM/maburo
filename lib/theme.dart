@@ -28,6 +28,7 @@ TextStyle subtitleTextStyle = GoogleFonts.poppins(color: subtitleTextColor);
 TextStyle priceTextStyle = GoogleFonts.poppins(color: priceColor);
 TextStyle blueTextStyle = GoogleFonts.poppins(color: primaryColor);
 TextStyle blackTextStyle = GoogleFonts.poppins(color: blackTextColor);
+TextStyle alertTextStyle = GoogleFonts.poppins(color: alertColor);
 
 FontWeight light = FontWeight.w300;
 FontWeight reguler = FontWeight.w400;
