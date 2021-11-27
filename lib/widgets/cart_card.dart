@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:maburo/models/cart_model.dart';
+import 'package:maburo/providers/cart_provider.dart';
 import 'package:maburo/theme.dart';
+import 'package:provider/provider.dart';
 
 class CartCard extends StatelessWidget {
+  final CartModel cart;
+  CartCard(this.cart);
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
     return Container(
       margin: EdgeInsets.only(
         top: defaultMargin,
@@ -26,7 +32,9 @@ class CartCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   image: DecorationImage(
-                    image: AssetImage('assets/image_1.png'),
+                    image: NetworkImage(
+                      cart.product.galleries[0].url,
+                    ),
                   ),
                 ),
               ),
@@ -38,11 +46,11 @@ class CartCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Terrex Urban Low',
+                      cart.product.name,
                       style: primaryTextStyle.copyWith(fontWeight: semiBold),
                     ),
                     Text(
-                      '\$143,98',
+                      '\$${cart.product.price}',
                       style: priceTextStyle,
                     ),
                   ],
@@ -50,23 +58,33 @@ class CartCard extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Image.asset(
-                    'assets/button_add.png',
-                    width: 16,
+                  GestureDetector(
+                    onTap: () {
+                      cartProvider.addQuantity(cart.id);
+                    },
+                    child: Image.asset(
+                      'assets/button_add.png',
+                      width: 16,
+                    ),
                   ),
                   SizedBox(
                     height: 2,
                   ),
                   Text(
-                    '2',
+                    cart.quantity.toString(),
                     style: primaryTextStyle.copyWith(fontWeight: medium),
                   ),
                   SizedBox(
                     height: 2,
                   ),
-                  Image.asset(
-                    'assets/button_reduce.png',
-                    width: 16,
+                  GestureDetector(
+                    onTap: () {
+                      cartProvider.reduceQuantity(cart.id);
+                    },
+                    child: Image.asset(
+                      'assets/button_reduce.png',
+                      width: 16,
+                    ),
                   ),
                 ],
               )
@@ -75,23 +93,28 @@ class CartCard extends StatelessWidget {
           SizedBox(
             height: 12,
           ),
-          Row(
-            children: [
-              Image.asset(
-                'assets/image_trash.png',
-                width: 10,
-              ),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                'Remove',
-                style: alertTextStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: light,
+          GestureDetector(
+            onTap: () {
+              cartProvider.removeCart(cart.id);
+            },
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/image_trash.png',
+                  width: 10,
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  'Remove',
+                  style: alertTextStyle.copyWith(
+                    fontSize: 12,
+                    fontWeight: light,
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),

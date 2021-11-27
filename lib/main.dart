@@ -3,14 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:maburo/pages/about_app_page.dart';
 import 'package:maburo/pages/cart_page.dart';
+import 'package:maburo/pages/checkout_page.dart';
 import 'package:maburo/pages/developer_detail.dart';
 import 'package:maburo/pages/edit_profile.dart';
 import 'package:maburo/pages/home/main_page.dart';
-import 'package:maburo/pages/product_page.dart';
 import 'package:maburo/pages/sign_in_page.dart';
 import 'package:maburo/pages/sign_up_page.dart';
 import 'package:maburo/pages/splash_page.dart';
 import 'package:maburo/providers/auth_provider.dart';
+import 'package:maburo/providers/cart_provider.dart';
 import 'package:maburo/providers/product_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthProvider(),
         ),
-        ChangeNotifierProvider(create: (context) => ProductProvider())
+        ChangeNotifierProvider(
+          create: (context) => ProductProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -37,6 +43,7 @@ class MyApp extends StatelessWidget {
           '/developer-detail': (context) => DeveloperDetailPage(),
           '/about-app': (context) => AboutAppPage(),
           '/cart': (context) => CartPage(),
+          '/checkout': (context) => CheckoutPage(),
         },
       ),
     );

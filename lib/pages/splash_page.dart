@@ -1,7 +1,5 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:maburo/providers/product_provider.dart';
 import 'package:maburo/theme.dart';

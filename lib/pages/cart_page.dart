@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:maburo/providers/cart_provider.dart';
 import 'package:maburo/theme.dart';
 import 'package:maburo/widgets/cart_card.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
     Widget header() {
       return Container(
         margin: EdgeInsets.only(top: 10),
@@ -89,7 +92,11 @@ class CartPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(
           horizontal: defaultMargin,
         ),
-        children: [CartCard()],
+        children: cartProvider.carts
+            .map(
+              (cart) => CartCard(cart),
+            )
+            .toList(),
       );
     }
 
@@ -110,7 +117,7 @@ class CartPage extends StatelessWidget {
                     style: primaryTextStyle,
                   ),
                   Text(
-                    '\$287,96',
+                    '\$${cartProvider.totalPrice()}',
                     style: priceTextStyle.copyWith(
                         fontSize: 16, fontWeight: semiBold),
                   ),
@@ -133,7 +140,9 @@ class CartPage extends StatelessWidget {
                 horizontal: defaultMargin,
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/checkout');
+                },
                 style: TextButton.styleFrom(
                   backgroundColor: primaryColor,
                   padding: EdgeInsets.symmetric(
@@ -172,8 +181,9 @@ class CartPage extends StatelessWidget {
         preferredSize: const Size.fromHeight(80),
         child: header(),
       ),
-      body: content(),
-      bottomNavigationBar: customButtomNav(),
+      body: cartProvider.carts.length == 0 ? emptyCard() : content(),
+      bottomNavigationBar:
+          cartProvider.carts.length == 0 ? SizedBox() : customButtomNav(),
     );
   }
 }
