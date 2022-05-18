@@ -204,6 +204,33 @@ class AboutAppPage extends StatelessWidget {
                                 'assets/SS_6.jpg',
                               )),
                         ),
+                        Padding(
+                          padding: EdgeInsets.all(6),
+                          child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                              child: Image.asset(
+                                'assets/SS_7.jpg',
+                              )),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(6),
+                          child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                              child: Image.asset(
+                                'assets/SS_8.jpg',
+                              )),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(6),
+                          child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                              child: Image.asset(
+                                'assets/SS_9.jpg',
+                              )),
+                        ),
                       ],
                     ),
                   )

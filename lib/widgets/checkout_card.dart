@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maburo/models/cart_model.dart';
 import 'package:maburo/theme.dart';
-import 'package:maburo/widgets/cart_card.dart';
 
 class CheckoutCard extends StatelessWidget {
   final CartModel cart;
